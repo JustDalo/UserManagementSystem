@@ -7,8 +7,5 @@ import org.springframework.web.bind.annotation.RequestMapping
 @Controller
 @RequestMapping("api/user")
 class UserController {
-    @GetMapping
-    fun getAllUsers() {
-        
-    }
+   
 }
