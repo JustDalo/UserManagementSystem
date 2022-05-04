@@ -1,4 +1,4 @@
-package com.dalo.usermanagementsystem
+package com.dalo.usermanagement
 
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.runApplication

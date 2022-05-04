@@ -1,12 +1,11 @@
-package com.dalo.usermanagementsystem.service.impl
+package com.dalo.usermanagement.service.impl
 
-import com.dalo.usermanagementsystem.dao.UserRepository
-import com.dalo.usermanagementsystem.exception.ResourceNotFoundException
-import com.dalo.usermanagementsystem.model.User
-import com.dalo.usermanagementsystem.service.UserService
+import com.dalo.usermanagement.dao.UserRepository
+import com.dalo.usermanagement.exception.ResourceNotFoundException
+import com.dalo.usermanagement.service.UserService
 import lombok.RequiredArgsConstructor
+import com.dalo.model.User
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +16,7 @@ class UserServiceImpl(private var userRepository: UserRepository) : UserService 
     }
 
     override fun getUserById(id: Long): User {
-        var user = userRepository.findById(id)
+        val user = userRepository.findById(id)
         if (user.isPresent) {
             return user.get()
         }
@@ -29,7 +28,7 @@ class UserServiceImpl(private var userRepository: UserRepository) : UserService 
     }
 
     override fun deleteUserById(id: Long) {
-        var user = userRepository.findById(id).orElseThrow { ResourceNotFoundException("User", "Id", id) }
+        val user = userRepository.findById(id).orElseThrow { ResourceNotFoundException("User", "Id", id) }
         userRepository.delete(user)
     }
 
@@ -42,7 +41,7 @@ class UserServiceImpl(private var userRepository: UserRepository) : UserService 
             )
         }
         existingUser.setFirstName(user!!.getFirstName())
-        existingUser.setLastName(user!!.getLastName())
+        existingUser.setLastName(user.getLastName())
         userRepository.save(existingUser)
 
         return existingUser

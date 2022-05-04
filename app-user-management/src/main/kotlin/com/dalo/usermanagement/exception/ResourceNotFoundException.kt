@@ -1,4 +1,4 @@
-package com.dalo.usermanagementsystem.exception
+package com.dalo.usermanagement.exception
 
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.ResponseStatus

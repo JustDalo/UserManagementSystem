@@ -1,8 +1,7 @@
-package com.dalo.usermanagementsystem.service
+package com.dalo.usermanagement.service
 
-import com.dalo.usermanagementsystem.model.User
+import com.dalo.model.User
 import org.springframework.stereotype.Service
-import java.util.*
 
 @Service
 interface UserService {

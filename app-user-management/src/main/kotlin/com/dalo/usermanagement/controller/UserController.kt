@@ -1,7 +1,7 @@
-package com.dalo.usermanagementsystem.controller
+package com.dalo.usermanagement.controller
 
-import com.dalo.usermanagementsystem.model.User
-import com.dalo.usermanagementsystem.service.UserService
+import com.dalo.usermanagement.service.UserService
+import com.dalo.model.User
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*

@@ -1,6 +1,6 @@
-package com.dalo.usermanagementsystem.dao
+package com.dalo.usermanagement.dao
 
-import com.dalo.usermanagementsystem.model.User
+import com.dalo.model.User
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.stereotype.Repository
 

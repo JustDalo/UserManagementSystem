@@ -1,28 +1,27 @@
-package com.dalo.usermanagementsystem.model
+package com.dalo.model
 
 import lombok.Data
-import lombok.Getter
-import lombok.Setter
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
 import javax.persistence.Table
-
+import javax.persistence.GenerationType
+import javax.persistence.GeneratedValue
 
 @Data
 @Entity
 @Table(name = "users", schema = "users")
-@Getter
-@Setter
 class User(
     @Id
-    @Column(name="usr_id")
+    @Column(name = "usr_id")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private var id: Long,
-    @Column(name="usr_first_name")
+    @Column(name = "usr_first_name")
     private var firstName: String,
-    @Column(name="usr_last_name")
+    @Column(name = "usr_last_name")
     private var lastName: String
 ) {
+    constructor() : this(-1, "", "")
     fun getFirstName(): String {
         return firstName
     }
