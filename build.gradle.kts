@@ -13,7 +13,7 @@ repositories {
 }
 
 allprojects {
-    group = "com.dalo"
+    group = "com.dalo.usermanagement"
     version = "0.0.1-SNAPSHOT"
 
     tasks.withType<JavaCompile> {

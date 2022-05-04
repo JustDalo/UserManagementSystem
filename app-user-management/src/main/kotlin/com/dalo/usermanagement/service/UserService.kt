@@ -1,6 +1,6 @@
 package com.dalo.usermanagement.service
 
-import com.dalo.model.User
+import com.dalo.usermanagement.model.User
 import org.springframework.stereotype.Service
 
 @Service

@@ -4,7 +4,7 @@ import com.dalo.usermanagement.dao.UserRepository
 import com.dalo.usermanagement.exception.ResourceNotFoundException
 import com.dalo.usermanagement.service.UserService
 import lombok.RequiredArgsConstructor
-import com.dalo.model.User
+import com.dalo.usermanagement.model.User
 import org.springframework.stereotype.Service
 
 @Service
