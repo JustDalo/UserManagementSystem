@@ -10,6 +10,9 @@
         <module name="userManagementSystem.app-user-management.main" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel target="18" />
+    <bytecodeTargetLevel target="18">
+      <module name="userManagementSystem.gradleSrc.main" target="1.8" />
+      <module name="userManagementSystem.gradleSrc.test" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

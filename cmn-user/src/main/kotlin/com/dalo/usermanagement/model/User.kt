@@ -1,6 +1,7 @@
 package com.dalo.usermanagement.model
 
 import lombok.Data
+import lombok.Getter
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -10,23 +11,30 @@ import javax.persistence.GeneratedValue
 import javax.persistence.SequenceGenerator
 import javax.validation.constraints.NotBlank
 
-@Data
 @Entity
 @Table(name = "users", schema = "users")
+@Getter
 class User(
-    @Id
-    @Column(name = "usr_id")
-    @SequenceGenerator(name = "pk_sequence", sequenceName = "entity_id_seq", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pk_sequence")
-    private var id: Long,
     @NotBlank
     @Column(name = "usr_first_name")
     private var firstName: String,
     @NotBlank
     @Column(name = "usr_last_name")
-    private var lastName: String
+    private var lastName: String,
+    @Column(name = "usr_role")
+    private var roldId: Long,
+    @Column(name = "usr_image")
+    private var image: ByteArray
 ) {
-    constructor() : this(-1, "", "")
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "usr_id")
+    private var id: Long = -1
+    constructor() : this("", "", 1, byteArrayOf())
+
+    fun getId(): Long {
+        return id
+    }
 
     fun getFirstName(): String {
         return firstName
@@ -42,5 +50,9 @@ class User(
 
     fun setLastName(lastName: String) {
         this.lastName = lastName
+    }
+
+    fun getImage(): ByteArray {
+        return image
     }
 }

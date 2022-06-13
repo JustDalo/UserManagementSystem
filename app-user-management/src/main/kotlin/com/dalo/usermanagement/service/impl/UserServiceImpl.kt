@@ -1,30 +1,46 @@
 package com.dalo.usermanagement.service.impl
 
 import com.dalo.usermanagement.dao.UserRepository
+import com.dalo.usermanagement.dto.UserDtoFromClient
+import com.dalo.usermanagement.dto.UserDtoToClient
 import com.dalo.usermanagement.exception.ResourceNotFoundException
+import com.dalo.usermanagement.mapping.FromUserMapper
+import com.dalo.usermanagement.mapping.ToUserMapper
 import com.dalo.usermanagement.service.UserService
-import lombok.RequiredArgsConstructor
 import com.dalo.usermanagement.model.User
 import org.springframework.stereotype.Service
+import java.util.*
+import java.util.stream.Collectors
 
 @Service
-@RequiredArgsConstructor
-class UserServiceImpl(private var userRepository: UserRepository) : UserService {
+class UserServiceImpl(
+    private val userRepository: UserRepository,
+    private val fromUserMapper: FromUserMapper,
+    private val toUserMapper: ToUserMapper
+) : UserService {
 
-    override fun getAllUsers(): List<User> {
-        return userRepository.findAll()
+    override fun getAllUsers(): List<UserDtoToClient> {
+        return userRepository.findAll().stream().map(toUserMapper::mapToUserDto).collect(Collectors.toList())
     }
 
-    override fun getUserById(id: Long): User {
+    override fun getUserById(id: Long): UserDtoToClient {
         val user = userRepository.findById(id)
+        if (user.isPresent) {
+            return toUserMapper.mapToUserDto(user.get())
+        }
+        throw ResourceNotFoundException("User", "Id", id)
+    }
+
+    override fun getImageById(id: Long): User {
+        val user: Optional<User> = userRepository.findById(id)
         if (user.isPresent) {
             return user.get()
         }
         throw ResourceNotFoundException("User", "Id", id)
     }
 
-    override fun createUser(user: User): User {
-        return userRepository.save(user)
+    override fun createUser(user: UserDtoFromClient): UserDtoFromClient {
+        return fromUserMapper.mapToUserDto(userRepository.save(fromUserMapper.mapToUser(user)))
     }
 
     override fun deleteUserById(id: Long) {
@@ -32,18 +48,19 @@ class UserServiceImpl(private var userRepository: UserRepository) : UserService 
         userRepository.delete(user)
     }
 
-    override fun updateUser(user: User?, id: Long?): User {
-        val existingUser = userRepository.findById(id!!).orElseThrow {
+    override fun updateUser(user: UserDtoFromClient?, id: Long?): UserDtoFromClient {
+        val existingUser: User = userRepository.findById(id!!).orElseThrow {
             ResourceNotFoundException(
                 "User",
                 "Id",
                 id
             )
         }
-        existingUser.setFirstName(user!!.getFirstName())
-        existingUser.setLastName(user.getLastName())
+        existingUser.setFirstName(user!!.firstName)
+        existingUser.setLastName(user.lastName)
+
         userRepository.save(existingUser)
 
-        return existingUser
+        return fromUserMapper.mapToUserDto(existingUser)
     }
 }
