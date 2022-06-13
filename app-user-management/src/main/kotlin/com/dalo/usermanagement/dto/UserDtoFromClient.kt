@@ -9,5 +9,4 @@ class UserDtoFromClient(
     val lastName: String,
     var image: ByteArray = byteArrayOf()
 ) {
-
 }

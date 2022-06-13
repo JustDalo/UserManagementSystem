@@ -1,13 +1,13 @@
 package com.dalo.usermanagement.model
 
 import lombok.Getter
+import org.springframework.security.core.authority.SimpleGrantedAuthority
 
-enum class UserRole(private val roleId: Long) {
-    USER(1L),
-    ADMIN(2L);
+enum class UserRole(roleId: Long) {
+    ROLE_USER(1L),
+    ROLE_ADMIN(2L);
 
     @Getter
-    private val roleNumber: Long = roleId;
-
+    private val roleNumber: Long = roleId
 
 }

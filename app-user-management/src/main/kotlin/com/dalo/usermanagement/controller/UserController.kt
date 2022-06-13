@@ -32,10 +32,12 @@ class UserController(private val userService: UserService, private val jsonMappe
         return ResponseEntity<User>(userService.getImageById(id), HttpStatus.OK)
     }
 
-    @PostMapping(consumes = [
-        MediaType.APPLICATION_JSON_VALUE,
-        MediaType.MULTIPART_FORM_DATA_VALUE
-    ])
+    @PostMapping(
+        consumes = [
+            MediaType.APPLICATION_JSON_VALUE,
+            MediaType.MULTIPART_FORM_DATA_VALUE
+        ]
+    )
     fun createUser(
         @RequestPart(value = "user") @Valid user: String,
         @RequestPart(value = "file", required = false) file: MultipartFile,

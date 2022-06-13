@@ -1,6 +1,5 @@
 package com.dalo.usermanagement.model
 
-import lombok.Data
 import lombok.Getter
 import javax.persistence.Column
 import javax.persistence.Entity
@@ -8,7 +7,6 @@ import javax.persistence.Id
 import javax.persistence.Table
 import javax.persistence.GenerationType
 import javax.persistence.GeneratedValue
-import javax.persistence.SequenceGenerator
 import javax.validation.constraints.NotBlank
 
 @Entity
@@ -30,6 +28,7 @@ class User(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usr_id")
     private var id: Long = -1
+
     constructor() : this("", "", 1, byteArrayOf())
 
     fun getId(): Long {
