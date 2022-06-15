@@ -58,6 +58,7 @@ class UserServiceImpl(
         }
         existingUser.setFirstName(user!!.firstName)
         existingUser.setLastName(user.lastName)
+        existingUser.setImage(user.image)
 
         userRepository.save(existingUser)
 

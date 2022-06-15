@@ -1,4 +1,4 @@
-package com.dalo.usermanagement.utils
+package com.dalo.usermanagement.testcontainer
 
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration

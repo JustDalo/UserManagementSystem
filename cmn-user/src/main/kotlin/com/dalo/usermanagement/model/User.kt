@@ -1,6 +1,8 @@
 package com.dalo.usermanagement.model
 
+import lombok.AllArgsConstructor
 import lombok.Getter
+import lombok.RequiredArgsConstructor
 import javax.persistence.Column
 import javax.persistence.Entity
 import javax.persistence.Id
@@ -12,7 +14,13 @@ import javax.validation.constraints.NotBlank
 @Entity
 @Table(name = "users", schema = "users")
 @Getter
-class User(
+@AllArgsConstructor
+@RequiredArgsConstructor
+data class User(
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "usr_id")
+    private var id: Long,
     @NotBlank
     @Column(name = "usr_first_name")
     private var firstName: String,
@@ -24,12 +32,15 @@ class User(
     @Column(name = "usr_image")
     private var image: ByteArray
 ) {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "usr_id")
-    private var id: Long = -1
+    constructor() : this(-1, "", "", 1, byteArrayOf())
 
-    constructor() : this("", "", 1, byteArrayOf())
+    constructor(firstName: String, lastName: String, image: ByteArray) : this(
+        -1,
+        firstName,
+        lastName,
+        1,
+        image
+    )
 
     fun getId(): Long {
         return id
@@ -53,5 +64,9 @@ class User(
 
     fun getImage(): ByteArray {
         return image
+    }
+
+    fun setImage(image: ByteArray) {
+        this.image = image
     }
 }

@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component
 class FromUserMapper {
     fun mapToUserDto(user: User): UserDtoFromClient {
         return UserDtoFromClient(
-            user.getId(),
             user.getFirstName(),
             user.getLastName(),
             user.getImage()
@@ -19,7 +18,6 @@ class FromUserMapper {
         return User(
             userDtoFromClient.firstName,
             userDtoFromClient.lastName,
-            1,
             userDtoFromClient.image
         )
     }
