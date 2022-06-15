@@ -14,10 +14,11 @@ class LocalhostPostgeSQLContainer : PostgreSQLContainer<LocalhostPostgeSQLContai
             if (!Companion::instance.isInitialized) {
                 instance = LocalhostPostgeSQLContainer()
                 instance.start()
-
-                System.setProperty("spring.datasource.url", instance.jdbcUrl)
-                System.setProperty("spring.datasource.username", instance.username)
-                System.setProperty("spring.datasource.password", instance.password)
+                val ddd = instance.jdbcUrl + "&currentSchema=users"
+                System.out.println(ddd)
+                System.setProperty("spring.datasource.url=", instance.jdbcUrl + "&currentSchema=users")
+                System.setProperty("spring.datasource.username=", instance.username)
+                System.setProperty("spring.datasource.password=", instance.password)
             }
         }
 
