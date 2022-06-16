@@ -4,7 +4,6 @@ plugins {
     kotlin("jvm") version "1.6.21"
     kotlin("plugin.spring") version "1.6.21"
     kotlin("plugin.jpa") version "1.6.21"
-    kotlin("kapt") version "1.6.21"
 }
 
 configurations {
@@ -34,11 +33,6 @@ dependencies {
     compileOnly("org.projectlombok:lombok")
     annotationProcessor("org.projectlombok:lombok")
 
-    kapt("io.micronaut.openapi:micronaut-openapi:4.3.0")
-    kapt("io.micronaut.security:micronaut-security-annotations:3.6.1")
-    kapt("io.micronaut:micronaut-graal:3.5.1")
-    kaptTest("io.micronaut:micronaut-inject:3.5.1")
-
     //mock
     testImplementation("io.mockk:mockk:1.12.4")
 
@@ -46,11 +40,6 @@ dependencies {
     testImplementation("io.micronaut.test:micronaut-test-kotest:3.4.0")
     testImplementation("io.micronaut.sql:micronaut-jdbc-hikari:4.4.0")
     testImplementation("io.micronaut.flyway:micronaut-flyway:5.3.0")
-
-    // https://mvnrepository.com/artifact/jakarta.annotation/jakarta.annotation-api
-    implementation("jakarta.annotation:jakarta.annotation-api:2.1.0")
-
-
 
     //kotest
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.1.1")
