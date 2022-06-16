@@ -111,6 +111,20 @@ class UserCRUDControllerTest(userRepository: UserRepository, mockMvc: MockMvc) :
         }
     }
 
+    Given("user repository for deleting user") {
+        val user = userRepository.save(User("Danilo", "Shyshlo", byteArrayOf()))
+        When("deleting user") {
+            val response = mockMvc.perform(
+                delete(BASE_PATH + "/" + user.getId()).contentType(MediaType.APPLICATION_JSON)
+            )
+                .andReturn()
+                .response
+            Then("deleteUser should return status 200 OK when deleting used with given id") {
+                response.status.shouldBe(HttpStatus.OK.value())
+            }
+        }
+    }
+
     Given("empty user repository for deleting user") {
         When("requesting user") {
             val response = mockMvc.perform(
