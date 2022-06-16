@@ -40,10 +40,9 @@ class UserController(private val userService: UserService, private val jsonMappe
     )
     fun createUser(
         @RequestPart(value = "user") @Valid user: String,
-        @RequestPart(value = "file", required = false) file: MultipartFile,
-        httpServletRequest: HttpServletRequest?
+        @RequestPart(value = "file", required = false) file: MultipartFile?,
     ): ResponseEntity<UserDtoFromClient> {
-        val userFromClient: UserDtoFromClient = if (!file.isEmpty) {
+        val userFromClient: UserDtoFromClient = if (file !== null) {
             jsonMapper.getJson(user, file)
         } else {
             jsonMapper.getJson(user)

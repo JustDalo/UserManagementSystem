@@ -67,7 +67,26 @@ class UserCRUDControllerTest(userRepository: UserRepository, mockMvc: MockMvc) :
         }
     }
 
-    Given("user repository for saving user") {
+    Given("user repository for saving user without attached file") {
+        val userMultipartFile = MockMultipartFile(
+            "user",
+            null,
+            "text/plain",
+            "{\"firstName\": \"Daniil\", \"lastName\": \"Shyshla\"}".toByteArray()
+        )
+        When("requesting user") {
+            val response = mockMvc.perform(
+                multipart(BASE_PATH).file(userMultipartFile)
+            )
+                .andReturn()
+                .response
+            Then("createUser should return status 201 CREATED when creating new user without attached file") {
+                response.status.shouldBe(HttpStatus.CREATED.value())
+            }
+        }
+    }
+
+    Given("user repository for saving user with attached file") {
         val userMultipartFile = MockMultipartFile(
             "user",
             null,
@@ -86,24 +105,8 @@ class UserCRUDControllerTest(userRepository: UserRepository, mockMvc: MockMvc) :
             )
                 .andReturn()
                 .response
-            Then("createUser should return status 201 CREATED when creating new user") {
+            Then("createUser should return status 201 CREATED when creating new user with attached file") {
                 response.status.shouldBe(HttpStatus.CREATED.value())
-            }
-        }
-    }
-
-    Given("user repository for deleting user") {
-        withContext(Dispatchers.IO) {
-            userRepository.save(User("Danilo", "Shyshlo", byteArrayOf()))
-        }
-        When("requesting user") {
-            val response = mockMvc.perform(
-                delete("$BASE_PATH/1").contentType(MediaType.APPLICATION_JSON)
-            )
-                .andReturn()
-                .response
-            Then("deleteUser should return status 200 OK when user is deleted") {
-                response.status.shouldBe(HttpStatus.OK.value())
             }
         }
     }
