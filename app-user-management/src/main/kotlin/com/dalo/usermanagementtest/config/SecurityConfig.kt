@@ -25,7 +25,6 @@ class SecurityConfig : WebSecurityConfigurerAdapter() {
                 authorize(HttpMethod.GET, "/api/users/", hasAnyAuthority("ADMIN"))
                 authorize(HttpMethod.POST, "/api/users/", hasAnyAuthority("ADMIN", "USER"))
                 authorize(HttpMethod.DELETE, "/api/users/", hasAnyAuthority("ADMIN"))
-                authorize("/**", permitAll)
             }
         }
     }

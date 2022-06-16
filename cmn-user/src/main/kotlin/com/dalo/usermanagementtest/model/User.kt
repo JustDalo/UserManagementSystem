@@ -42,6 +42,14 @@ data class User(
         image
     )
 
+    constructor(firstName: String, lastName: String) : this(
+        -1,
+        firstName,
+        lastName,
+        1,
+        byteArrayOf()
+    )
+
     fun getId(): Long {
         return id
     }

@@ -41,8 +41,6 @@ dependencies {
 
     //mock
     testImplementation("io.mockk:mockk:1.12.4")
-    // https://mvnrepository.com/artifact/org.mockito/mockito-core
-    testImplementation("org.mockito:mockito-core:4.6.1")
 
     //micronaut
     testImplementation("io.micronaut.test:micronaut-test-kotest:3.4.0")

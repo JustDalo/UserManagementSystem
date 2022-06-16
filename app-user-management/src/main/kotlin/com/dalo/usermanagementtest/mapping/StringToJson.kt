@@ -13,4 +13,11 @@ class StringToJson {
         userJson.image = file.bytes
         return userJson
     }
+
+    fun getJson(user: String): UserDtoFromClient {
+        val mapper = jacksonObjectMapper()
+        val userJson: UserDtoFromClient = mapper.readValue(user, UserDtoFromClient::class.java)
+        userJson.image = byteArrayOf()
+        return userJson
+    }
 }
